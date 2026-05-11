@@ -1,0 +1,14 @@
+services:
+  cee-mod-manager:
+    build: .
+    container_name: cee-mod-manager-dev
+    ports:
+      - "6080:6080"
+    volumes:
+      - .:/app
+      # We ignore node_modules or other large dirs if they existed, but for Python
+      # we might want to preserve the virtualenv if it was inside, but here we use system pip.
+    environment:
+      - DISPLAY=:1
+      - APP_ENV=development
+    restart: unless-stopped

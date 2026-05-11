@@ -1,0 +1,19 @@
+services:
+  cee-mod-manager:
+    # If you push to Docker Hub, change this to: image: davebowlin/ceemodmanager:latest
+    build: . 
+    container_name: cee-mod-manager
+    ports:
+      - "6080:6080"
+    environment:
+      - DISPLAY=:1
+      - APP_ENV=production
+    volumes:
+      # Map persistent data so you don't lose your settings when the container stops
+      - manager_data:/app/data
+      - manager_backups:/app/backups
+    restart: unless-stopped
+
+volumes:
+  manager_data:
+  manager_backups:
